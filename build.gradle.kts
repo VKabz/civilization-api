@@ -1,14 +1,14 @@
 plugins {
+    id("org.jetbrains.kotlin.jvm") version "1.9.0"
     id("java-library")
     id("maven-publish")
 }
 
-group = "com.github.VKabz" // Укажите ваш GitHub-логин в группе для совместимости с JitPack
-version = "1.0.0"
+group = "com.github.VKabz"
+version = "1.0.1"
 
-
-dependencies {
-    implementation("com.github.VKabz:civilization-api:-SNAPSHOT")
+repositories {
+    mavenCentral()
 }
 
 java {
@@ -16,18 +16,21 @@ java {
     withJavadocJar()
 }
 
+tasks.jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from(sourceSets.main.get().output) // Включаем скомпилированный код в JAR
+    manifest {
+        attributes(
+            "Implementation-Title" to project.name,
+            "Implementation-Version" to project.version
+        )
+    }
+}
+
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
-            artifactId = "civilization-api" // Укажите имя артефакта для публикации
-        }
-    }
-    repositories {
-        maven {
-            // Оставьте JitPack пустым, так как он автоматически обрабатывает публикацию
-            // Если нужен другой репозиторий, укажите его URL:
-            // url = uri("https://repo.yourserver.com/releases")
         }
     }
 }
