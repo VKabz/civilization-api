@@ -3,7 +3,7 @@ plugins {
     id("maven-publish")
 }
 
-group = "ru.vkabz.civilization"
+group = "com.github.VKabz" // Укажите ваш GitHub-логин в группе для совместимости с JitPack
 version = "1.0.0"
 
 repositories {
@@ -12,17 +12,21 @@ repositories {
 
 java {
     withSourcesJar()
+    withJavadocJar()
 }
 
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
+            artifactId = "civilization-api" // Укажите имя артефакта для публикации
         }
     }
     repositories {
         maven {
-            url = uri("https://repo.yourserver.com/releases") // Replace with your repository
+            // Оставьте JitPack пустым, так как он автоматически обрабатывает публикацию
+            // Если нужен другой репозиторий, укажите его URL:
+            // url = uri("https://repo.yourserver.com/releases")
         }
     }
 }
