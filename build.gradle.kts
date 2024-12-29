@@ -9,6 +9,13 @@ version = "1.0.1"
 
 repositories {
     mavenCentral()
+    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") // Для Spigot API
+    maven("https://oss.sonatype.org/content/repositories/snapshots/") // Для Paper API (опционально)
+}
+
+dependencies {
+    implementation("org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT") // Замените версию на вашу
+    implementation(kotlin("stdlib")) // Подключение стандартной библиотеки Kotlin
 }
 
 java {

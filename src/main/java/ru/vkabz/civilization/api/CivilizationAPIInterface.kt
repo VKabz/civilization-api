@@ -1,6 +1,7 @@
 package ru.vkabz.civilization.api
 
-import java.util.UUID
+import org.bukkit.Bukkit
+import java.util.*
 
 interface CivilizationAPIInterface {
     fun getReputation(playerId: UUID): Int
@@ -12,4 +13,17 @@ interface CivilizationAPIInterface {
     fun getCivilization(playerId: UUID): String?
     fun resetCivilization(playerId: UUID): Boolean
     fun updatePlayerTab(playerId: UUID)
+
+    companion object {
+        /**
+         * Получает экземпляр CivilizationAPIInterface из Bukkit Service Manager.
+         *
+         * @return CivilizationAPIInterface
+         * @throws IllegalStateException если API не зарегистрирован.
+         */
+        fun getAPI(): CivilizationAPIInterface {
+            return Bukkit.getServicesManager().load(CivilizationAPIInterface::class.java)
+                ?: throw IllegalStateException("Civilization API is not registered!")
+        }
+    }
 }
