@@ -6,8 +6,9 @@ plugins {
 group = "com.github.VKabz" // Укажите ваш GitHub-логин в группе для совместимости с JitPack
 version = "1.0.0"
 
-repositories {
-    mavenCentral()
+
+dependencies {
+    implementation("com.github.VKabz:civilization-api:-SNAPSHOT")
 }
 
 java {
